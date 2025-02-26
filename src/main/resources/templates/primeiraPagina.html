@@ -7,5 +7,12 @@
   </head>
   <body>
     <p th:text="${message}"></p>
+
+    <form th:action="@{/cadastro}" method="post">
+      <label htmlFor="name">Nome do candidato</label>
+      <input type="text" name="name" id="name" />
+
+      <button type="submit">Enviar</button>
+    </form>
   </body>
 </html>
