@@ -4,9 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <title>Login do Candidato</title>
+    <title>Perfil do Candidato</title>
   </head>
-  <body class="bg-gray-900 h-screen flex justify-center items-center">
-    <p class="text-white">Profile do Candidato</p>
+  <body class="bg-gray-900">
+    <nav class="bg-gray-800">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center text-white">
+          <div class="text-white space-x-4">
+            <a
+              href="/candidate/profile"
+              class="bg-gray-900 rounded-md px-3 py-2"
+              >Profile</a
+            >
+            <a href="/candidate/jobs">Vagas</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="flex px-40 py-20 text-white justify-center">
+      <div
+        class="grid bg-gray-800 w-1/2 columns-1 grid-cols-1 p-10 rounded justify-between gap-4"
+      >
+        <p class="justify-between w-full flex font-bold">
+          Nome:
+          <span
+            class="text-base text-gray-300 font-regular"
+            th:text="${candidate.name}"
+          ></span>
+        </p>
+        <p class="justify-between w-full flex font-bold">
+          Email:
+          <span
+            class="text-base text-gray-300 font-regular"
+            th:text="${candidate.email}"
+          ></span>
+        </p>
+        <p class="justify-between w-full flex font-bold">
+          Usuário:
+          <span
+            class="text-base text-gray-300 font-regular"
+            th:text="${candidate.username}"
+          ></span>
+        </p>
+      </div>
+    </div>
   </body>
 </html>
