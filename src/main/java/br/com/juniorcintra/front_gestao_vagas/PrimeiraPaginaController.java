@@ -23,10 +23,11 @@ public class PrimeiraPaginaController {
   }
 
   @PostMapping("/cadastro")
-  public String cadastroCandidate(Candidate candidate) {
+  public String cadastroCandidate(Model model, Candidate candidate) {
 
+    model.addAttribute("candidate", candidate);
 
-    return "redirect:/login";
+    return "cancidate/info";
   }
 
   record Candidate(String name, String email, String username) {

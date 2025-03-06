@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informações do candidato</title>
+  </head>
+  <body>
+    <p>Informações do candidato</p>
+
+    <form th:object="${candidate}">
+      <p>Nome: <span th:text="*{candidate.name}"></span></p>
+      <p>Email: <span th:text="*{candidate.email}"></span></p>
+      <p>Username: <span th:text="*{candidate.username}"></span></p>
+    </form>
+  </body>
+</html>
