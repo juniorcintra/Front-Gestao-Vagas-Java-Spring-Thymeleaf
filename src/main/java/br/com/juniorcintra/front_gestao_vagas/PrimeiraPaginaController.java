@@ -23,10 +23,13 @@ public class PrimeiraPaginaController {
   }
 
   @PostMapping("/cadastro")
-  public String cadastroCandidate(String name) {
+  public String cadastroCandidate(Candidate candidate) {
 
 
-    return "candidate/login";
+    return "redirect:/login";
+  }
+
+  record Candidate(String name, String email, String username) {
 
   }
 }

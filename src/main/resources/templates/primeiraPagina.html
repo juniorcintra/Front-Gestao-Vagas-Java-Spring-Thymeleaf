@@ -8,9 +8,15 @@
   <body>
     <p th:text="${message}"></p>
 
-    <form th:action="@{/cadastro}" method="post">
+    <form th:action="@{/cadastro}" method="post" th:object="${candidate}">
       <label htmlFor="name">Nome do candidato</label>
       <input type="text" name="name" id="name" />
+
+      <label htmlFor="email">Email do candidato</label>
+      <input type="text" name="email" id="email" />
+
+      <label htmlFor="username">Usuario do candidato</label>
+      <input type="text" name="username" id="username" />
 
       <button type="submit">Enviar</button>
     </form>
