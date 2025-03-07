@@ -78,12 +78,14 @@ public class CandidateController {
 
     try {
       if (filter != null) {
-        this.candidateService.getJobs(getToken(), filter);
+        var jobs = this.candidateService.getJobs(getToken(), filter);
+
+        model.addAttribute("jobs", jobs);
       }
-      return "candidate/jobs";
     } catch (HttpClientErrorException e) {
       return "redirect:/candidate/login";
     }
+    return "candidate/jobs";
   }
 
   private String getToken() {

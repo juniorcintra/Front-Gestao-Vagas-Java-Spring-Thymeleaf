@@ -1,8 +1,10 @@
 package br.com.juniorcintra.front_gestao_vagas.modules.candidate.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,6 +15,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.JobDTO;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.ProfileDTO;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.Token;
 
@@ -59,7 +62,7 @@ public class CandidateService {
     }
   }
 
-  public String getJobs(String token, String filter) {
+  public List<JobDTO> getJobs(String token, String filter) {
     RestTemplate restTemplate = new RestTemplate();
 
     HttpHeaders headers = new HttpHeaders();
@@ -72,9 +75,11 @@ public class CandidateService {
     UriComponentsBuilder builder =
         UriComponentsBuilder.fromUriString(url).queryParam("filter", filter);
 
+    ParameterizedTypeReference<List<JobDTO>> type =
+        new ParameterizedTypeReference<List<JobDTO>>() {};
+
     try {
-      var result =
-          restTemplate.exchange(builder.toUriString(), HttpMethod.GET, request, String.class);
+      var result = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, request, type);
 
       return result.getBody();
     } catch (Unauthorized e) {

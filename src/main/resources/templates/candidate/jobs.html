@@ -34,6 +34,10 @@
           Buscar
         </button>
       </form>
+
+      <div th:each="job : ${jobs}" class="text-white">
+        <h2 th:text="${job.title}"></h2>
+      </div>
     </div>
   </body>
 </html>
