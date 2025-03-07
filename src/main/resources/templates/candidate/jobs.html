@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Vagas disponíveis</title>
+  </head>
+  <body class="bg-gray-900">
+    <nav class="bg-gray-800">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center text-white">
+          <div class="text-white space-x-4">
+            <a href="/candidate/profile">Profile</a>
+            <a href="/candidate/jobs" class="bg-gray-900 rounded-md px-3 py-2"
+              >Vagas</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mx-auto mt-24 text-center">
+      <form action="">
+        <input
+          type="text"
+          name="filter"
+          placeholder="Busca de vagas"
+          class="bg-gray-50 text-gray-500 rounded w-96 p-3 focus:outline-none focus:ring-green-600 focus:ring-2"
+        />
+        <button
+          class="bg-green-600 rounded w-24 p-3 text-white hover:bg-green-500"
+        >
+          Buscar
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

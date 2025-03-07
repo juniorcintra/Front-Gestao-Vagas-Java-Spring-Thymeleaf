@@ -2,6 +2,7 @@ package br.com.juniorcintra.front_gestao_vagas.modules.candidate.service;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,6 +18,9 @@ import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.Token;
 @Service
 public class CandidateService {
 
+  @Value("${host.api.gestao.vagas}")
+  private String hostAPIGestaoVagas;
+
   public Token signIn(String username, String password) {
     RestTemplate restTemplate = new RestTemplate();
 
@@ -29,10 +33,9 @@ public class CandidateService {
 
     HttpEntity<Map<String, String>> request = new HttpEntity<>(data, headers);
 
+    var url = hostAPIGestaoVagas.concat("/auth-candidate");
 
-
-    var result =
-        restTemplate.postForObject("http://localhost:8080/auth-candidate", request, Token.class);
+    var result = restTemplate.postForObject(url, request, Token.class);
     return result;
   }
 

@@ -72,4 +72,16 @@ public class CandidateController {
       return "redirect:/candidate/login";
     }
   }
+
+  @GetMapping("/jobs")
+  @PreAuthorize("hasRole('CANDIDATE')")
+  public String jobs() {
+    try {
+
+
+      return "candidate/jobs";
+    } catch (HttpClientErrorException e) {
+      return "redirect:/candidate/login";
+    }
+  }
 }
