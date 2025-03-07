@@ -1,10 +1,9 @@
 package br.com.juniorcintra.front_gestao_vagas.modules.candidate.controller;
 
-import java.util.HashSet;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,7 +40,7 @@ public class CandidateController {
       UsernamePasswordAuthenticationToken authentication =
           new UsernamePasswordAuthenticationToken(null, null, grants);
 
-      authentication.setDetails(token);
+      authentication.setDetails(token.getAccess_token());
 
       SecurityContextHolder.getContext().setAuthentication(authentication);
       SecurityContext securityContext = SecurityContextHolder.getContext();
@@ -60,6 +59,9 @@ public class CandidateController {
   @GetMapping("/profile")
   @PreAuthorize("hasRole('CANDIDATE')")
   public String profile() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    var result = this.candidateService.getProfile(authentication.getDetails().toString());
+
     return "candidate/profile";
   }
 }
