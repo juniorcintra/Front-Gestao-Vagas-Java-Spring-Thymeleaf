@@ -62,8 +62,7 @@ public class CandidateController {
   @PreAuthorize("hasRole('CANDIDATE')")
   public String profile(Model model) {
     try {
-      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-      var user = this.candidateService.getProfile(authentication.getDetails().toString());
+      var user = this.candidateService.getProfile(getToken());
 
       model.addAttribute("user", user);
 
@@ -75,13 +74,21 @@ public class CandidateController {
 
   @GetMapping("/jobs")
   @PreAuthorize("hasRole('CANDIDATE')")
-  public String jobs() {
+  public String jobs(Model model, String filter) {
+
     try {
-
-
+      if (filter != null) {
+        this.candidateService.getJobs(getToken(), filter);
+      }
       return "candidate/jobs";
     } catch (HttpClientErrorException e) {
       return "redirect:/candidate/login";
     }
+  }
+
+  private String getToken() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    return authentication.getDetails().toString();
   }
 }

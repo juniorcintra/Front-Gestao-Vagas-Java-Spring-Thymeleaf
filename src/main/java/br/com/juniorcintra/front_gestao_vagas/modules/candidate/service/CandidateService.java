@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.ProfileDTO;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.Token;
 
@@ -47,9 +48,33 @@ public class CandidateService {
 
     HttpEntity<Map<String, String>> request = new HttpEntity<>(headers);
 
+    var url = hostAPIGestaoVagas.concat("/candidate");
+
     try {
-      var result = restTemplate.exchange("http://localhost:8080/candidate", HttpMethod.GET, request,
-          ProfileDTO.class);
+      var result = restTemplate.exchange(url, HttpMethod.GET, request, ProfileDTO.class);
+
+      return result.getBody();
+    } catch (Unauthorized e) {
+      throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
+    }
+  }
+
+  public String getJobs(String token, String filter) {
+    RestTemplate restTemplate = new RestTemplate();
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setBearerAuth(token);
+
+    HttpEntity<Map<String, String>> request = new HttpEntity<>(headers);
+
+    var url = hostAPIGestaoVagas.concat("/company/jobs");
+
+    UriComponentsBuilder builder =
+        UriComponentsBuilder.fromUriString(url).queryParam("filter", filter);
+
+    try {
+      var result =
+          restTemplate.exchange(builder.toUriString(), HttpMethod.GET, request, String.class);
 
       return result.getBody();
     } catch (Unauthorized e) {
