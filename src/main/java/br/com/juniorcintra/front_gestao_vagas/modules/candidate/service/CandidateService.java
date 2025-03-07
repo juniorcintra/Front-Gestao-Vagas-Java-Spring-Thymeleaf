@@ -5,8 +5,11 @@ import java.util.Map;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 import org.springframework.web.client.RestTemplate;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.ProfileDTO;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.Token;
@@ -41,10 +44,14 @@ public class CandidateService {
 
     HttpEntity<Map<String, String>> request = new HttpEntity<>(headers);
 
-    var result = restTemplate.exchange("http://localhost:8080/candidate", HttpMethod.GET, request,
-        ProfileDTO.class);
+    try {
+      var result = restTemplate.exchange("http://localhost:8080/candidate", HttpMethod.GET, request,
+          ProfileDTO.class);
 
-    return result.getBody();
+      return result.getBody();
+    } catch (Unauthorized e) {
+      throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
+    }
   }
 
 }
