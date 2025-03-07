@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.ProfileDTO;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.Token;
 
 @Service
@@ -32,7 +33,7 @@ public class CandidateService {
     return result;
   }
 
-  public String getProfile(String token) {
+  public ProfileDTO getProfile(String token) {
     RestTemplate restTemplate = new RestTemplate();
 
     HttpHeaders headers = new HttpHeaders();
@@ -41,7 +42,7 @@ public class CandidateService {
     HttpEntity<Map<String, String>> request = new HttpEntity<>(headers);
 
     var result = restTemplate.exchange("http://localhost:8080/candidate", HttpMethod.GET, request,
-        String.class);
+        ProfileDTO.class);
 
     return result.getBody();
   }
