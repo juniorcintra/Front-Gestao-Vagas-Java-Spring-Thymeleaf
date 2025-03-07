@@ -60,7 +60,7 @@ public class CandidateController {
   @PreAuthorize("hasRole('CANDIDATE')")
   public String profile() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    var result = this.candidateService.getProfile(authentication.getDetails().toString());
+    this.candidateService.getProfile(authentication.getDetails().toString());
 
     return "candidate/profile";
   }

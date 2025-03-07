@@ -22,31 +22,23 @@
       </div>
     </nav>
 
-    <div class="flex px-40 py-20 text-white justify-center">
-      <div
-        class="grid bg-gray-800 w-1/2 columns-1 grid-cols-1 p-10 rounded justify-between gap-4"
-      >
-        <p class="justify-between w-full flex font-bold">
-          Nome:
-          <span
-            class="text-base text-gray-300 font-regular"
-            th:text="${candidate.name}"
-          ></span>
-        </p>
-        <p class="justify-between w-full flex font-bold">
-          Email:
-          <span
-            class="text-base text-gray-300 font-regular"
-            th:text="${candidate.email}"
-          ></span>
-        </p>
-        <p class="justify-between w-full flex font-bold">
-          Usuário:
-          <span
-            class="text-base text-gray-300 font-regular"
-            th:text="${candidate.username}"
-          ></span>
-        </p>
+    <div class="container mx-auto mt-10">
+      <div class="bg-gray-800 p-8 rounded-lg shadow-md">
+        <h1 class="text-2xl text-gray-100 font-bold mb-2 text-center">
+          Nome do Candidato
+        </h1>
+
+        <div class="text-center mb-4">
+          <p class="text-gray-400">
+            <span class="font-bold">Usuário:</span> teste
+          </p>
+          <p class="text-gray-400">
+            <span class="font-bold">E-mail:</span> teste@teste.com
+          </p>
+          <p class="text-gray-400">
+            <span class="font-bold">Descrição:</span> description
+          </p>
+        </div>
       </div>
     </div>
   </body>
