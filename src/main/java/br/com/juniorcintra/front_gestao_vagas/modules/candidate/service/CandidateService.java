@@ -12,7 +12,7 @@ import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.Token;
 @Service
 public class CandidateService {
 
-  public Token login(String username, String password) {
+  public Token signIn(String username, String password) {
     RestTemplate restTemplate = new RestTemplate();
 
     HttpHeaders headers = new HttpHeaders();
