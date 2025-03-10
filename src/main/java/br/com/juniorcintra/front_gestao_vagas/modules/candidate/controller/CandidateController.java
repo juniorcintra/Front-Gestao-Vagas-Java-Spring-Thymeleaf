@@ -113,12 +113,12 @@ public class CandidateController {
   public String createCandidate(CreateCandidateDTO createCandidateDTO, Model model) {
     try {
       this.candidateService.createCandidate(createCandidateDTO);
-
-      model.addAttribute("candidate", createCandidateDTO);
-      return "candidate/create";
     } catch (HttpClientErrorException e) {
-      return "redirect:/candidate/login";
+      model.addAttribute("error_message", e.getMessage());
     }
+
+    model.addAttribute("candidate", createCandidateDTO);
+    return "candidate/create";
   }
 
   private String getToken() {

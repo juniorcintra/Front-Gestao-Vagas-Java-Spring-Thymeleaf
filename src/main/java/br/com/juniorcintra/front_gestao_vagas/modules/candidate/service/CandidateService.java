@@ -16,6 +16,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.CreateCandidateDTO;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.JobDTO;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.ProfileDTO;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.Token;
@@ -101,6 +102,21 @@ public class CandidateService {
 
     var result = restTemplate.postForObject(url, request, String.class);
     return result;
+  }
+
+  public void createCandidate(CreateCandidateDTO createCandidateDTO) {
+
+    RestTemplate restTemplate = new RestTemplate();
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+
+    HttpEntity<CreateCandidateDTO> request = new HttpEntity<>(createCandidateDTO, headers);
+
+    var url = hostAPIGestaoVagas.concat("/candidate");
+
+    restTemplate.postForObject(url, request, String.class);
+
   }
 
 }
