@@ -3,6 +3,7 @@ package br.com.juniorcintra.front_gestao_vagas.modules.candidate.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -85,6 +86,21 @@ public class CandidateService {
     } catch (Unauthorized e) {
       throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
     }
+  }
+
+  public String applyJob(String token, UUID jobId) {
+    RestTemplate restTemplate = new RestTemplate();
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    headers.setBearerAuth(token);
+
+    HttpEntity<UUID> request = new HttpEntity<>(jobId, headers);
+
+    var url = hostAPIGestaoVagas.concat("/candidate/apply");
+
+    var result = restTemplate.postForObject(url, request, String.class);
+    return result;
   }
 
 }

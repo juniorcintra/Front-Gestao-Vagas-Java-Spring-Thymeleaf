@@ -41,12 +41,14 @@
             th:each="job : ${jobs}"
             class="text-white bg-gray-800 p-4 mb-4 shadow"
           >
+            <input type="hidden" name="jobId" th:value="${job.id}" />
             <h2 th:text="${job.title}"></h2>
             <span th:text="${job.description}" class="block"></span>
             <span th:text="${job.level}" class="block"></span>
             <span th:text="${job.benefits}" class="block"></span>
             <button
               class="bg-green-500 rounded font-bold mt-2 py-2 px-4 text-white hover:bg-green-400"
+              type="submit"
             >
               Aplicar
             </button>
