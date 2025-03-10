@@ -18,7 +18,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.dto.CreateCandidateDTO;
 import br.com.juniorcintra.front_gestao_vagas.modules.candidate.service.CandidateService;
-
+import br.com.juniorcintra.front_gestao_vagas.utils.FormatErrorMessage;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -114,7 +114,8 @@ public class CandidateController {
     try {
       this.candidateService.createCandidate(createCandidateDTO);
     } catch (HttpClientErrorException e) {
-      model.addAttribute("error_message", e.getMessage());
+      model.addAttribute("error_message",
+          FormatErrorMessage.formatErrorMessage(e.getResponseBodyAsString()));
     }
 
     model.addAttribute("candidate", createCandidateDTO);
